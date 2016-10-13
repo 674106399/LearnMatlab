@@ -17,15 +17,16 @@ while running
                 continue;
             end
            
-            if ~isstroprop(usrname,'alphanum')
+            usrnamecheck = regexp(usrname,'^[a-zA-Z][a-zA-Z0-9]+');
+            if isempty(usrnamecheck)
                 disp('invalid username');
-                continue
-            end
-            initial = usrname(1);
-            if ~isletter(initial)
-                disp('initial should be a letter');
                 continue;
             end
+%             initial = usrname(1);
+%             if ~isletter(initial)
+%                 disp('initial should be a letter');
+%                 continue;
+%             end
             
         break;
         end
@@ -38,10 +39,13 @@ while running
                 disp('password is too short');
                 continue;
             end
-            if ~isstroprop(pasword,'alphanum')
+            
+            paswordcheck = regexp(pasword,'^[a-zA-Z][a-zA-Z0-9]+');
+            if isempty(paswordcheck)
                 disp('invalid password');
                 continue;
             end
+            
             initial = pasword(1);
             if ~isletter(initial)
                 disp('initial should be a letter');
@@ -58,16 +62,25 @@ while running
         
         while true
              chinesename = input('chinese name:','s');
+             chinesecheck = regexp(chinesename,'^[\u4e00-\u9fa5]+$');
+             if isempty(chinesecheck)
+                 disp('chinese name cannot be anything except chinese words');
+                 continue;
+             end
             break; 
         end
        
         while true
             sex = input('sex:','s');
+            if strcmp(sex,'male') ~= 0 && strcmp(sex,'female') ~= 0
+                disp('invalid sex');
+                continue;
+            end
             break;
         end
-        
-
-        
+    else if command == 'r'
+            
+        end
     end
 end
     
