@@ -4,11 +4,13 @@ user(1).usrname = '';
 user(1).pasword = '';
 user(1).name = '';
 user(1).sex = '';
+size = 1;
 
 running = true;
 while running
-    command = input('log or register?(l/g)','s');
-    if command == 'l'
+    command = input('log or register?(l/r)','s');
+    if command == 'r'
+        disp('---- YOU CHOOSE TO REGISTER ----');
         while true
             usrname = input('username:','s');
             %check username
@@ -78,8 +80,32 @@ while running
             end
             break;
         end
-    else if command == 'r'
-            
+
+        user(size).usrname = usrname;
+        user(size).pasword = pasword;
+        user(size).chinesename = chinesename;
+        user(size).sex = sex;
+        size = size + 1;
+ 
+    else if command == 'l'
+        disp('---- YOU CHOOSE TO LOG IN ----');
+        logname = input('username:','s');
+        logpswd = input('password:','s');
+        logsuccess = 0;
+        for i = 1 : size-1
+            if regexp(user(i).usrname,logname) == 1
+                logsuccess = 1;
+                break;
+            end
+        end    
+
+        if logsuccess == 1
+            disp('log in success!');
+            disp(['your chinesename: ',user(i).chinesename]);
+            disp(['your sex: ',user(i).sex]);
+        else
+            disp('log in failed! please check your username/password.');
+        end
         end
     end
 end
